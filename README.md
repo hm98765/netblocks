@@ -11,7 +11,33 @@ The schedule of this refresh can be managed in the cron.yaml and the bucket and 
 
 Potential listeners could be [Cloud Functions](https://cloud.google.com/functions/).
 
+### API Usage
 
+    import netblocks
+    cidr_blocks = set()
+    netblocks_api = netblocks.NetBlocks()
+    try:
+        cidr_blocks = netblocks_api.fetch()
+        
+        """
+        The cidr_blocks set contains strings like the below
+        ip4:146.148.2.0/23
+        ...
+        ip6:2600:1900::/35
+        """
+        
+    except netblocks.NetBlockRetrievalException as err:
+        #exception handling
+        pass
+
+### The GAE App
+*  UpdateGCSBucket </br> 
+ This class creates a file in the GCS bucket as specified in config.py.</br>
+ The files contains entries such as the below: </br>
+ ip4:146.148.2.0/23</br>
+ ...</br>
+ ip6:2600:1900::/35</br>
+ 
 ## Products
 - [Google App Engine](https://cloud.google.com/appengine/)
 

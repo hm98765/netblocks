@@ -59,7 +59,7 @@ class DNSRefresh(webapp2.RequestHandler):
         ip6:2600:1900::/35
     
         Args:
-          cidr_blocks: The URL to fetch the json payload.
+          cidr_blocks: the set of cidr blocks
     
         Raises:
           DNSRefreshException: raised if any issue in dns refresh
