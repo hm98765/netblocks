@@ -32,11 +32,11 @@ Potential listeners could be [Cloud Functions](https://cloud.google.com/function
 
 ### The GAE App
 *  UpdateGCSBucket </br> 
- This class creates a file in the GCS bucket as specified in config.py.</br>
- The files contains entries such as the below: </br>
- ip4:146.148.2.0/23</br>
- ...</br>
- ip6:2600:1900::/35</br>
+ This class creates a file in the GCS bucket as specified in config.py.<br/>
+ The files contains entries such as the below: <br/>
+ ip4:146.148.2.0/23<br/>
+ ...<br/>
+ ip6:2600:1900::/35<br/>
  
 ## Products
 - [Google App Engine](https://cloud.google.com/appengine/)
