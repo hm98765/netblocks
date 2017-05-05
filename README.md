@@ -50,10 +50,10 @@ Potential listeners could be [Cloud Functions](https://cloud.google.com/function
 - [Python](https://www.python.org/)
 
 ## Dependencies
-Run these steps before deploying the app
-mkdir lib
-pip install -t ./lib/ google-api-python-client
-pip install -t ./lib/ GoogleAppEngineCloudStorageClient 
+Run these steps before deploying the app <br/>
+mkdir lib <br/>
+pip install -t ./lib/ google-api-python-client <br/>
+pip install -t ./lib/ GoogleAppEngineCloudStorageClient <br/> 
 
 ## License
 Apache 2.0; see [LICENSE](LICENSE) for details.
