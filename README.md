@@ -38,10 +38,9 @@ Potential listeners could be [Cloud Functions](https://cloud.google.com/function
  ip4:146.148.2.0/23<br/>
  ...<br/>
  ip6:2600:1900::/35<br/>
-  <p style='color:red'>
  Make sure to create a bucket prior to runnign the app<br/>
  This bucket-name should be changed in the config.py under GCS_BUCKET
- </p>
+ 
  
  
 ## Products
