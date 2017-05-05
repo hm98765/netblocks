@@ -31,12 +31,18 @@ Potential listeners could be [Cloud Functions](https://cloud.google.com/function
         pass
 
 ### The GAE App
-*  UpdateGCSBucket </br> 
+*  UpdateGCSBucket </br>
+
  This class creates a file in the GCS bucket as specified in config.py.<br/>
  The files contains entries such as the below: <br/>
  ip4:146.148.2.0/23<br/>
  ...<br/>
  ip6:2600:1900::/35<br/>
+  <p style='color:red'>
+ Make sure to create a bucket prior to runnign the app<br/>
+ This bucket-name should be changed in the config.py under GCS_BUCKET
+ </p>
+ 
  
 ## Products
 - [Google App Engine](https://cloud.google.com/appengine/)
@@ -45,11 +51,7 @@ Potential listeners could be [Cloud Functions](https://cloud.google.com/function
 - [Python](https://www.python.org/)
 
 ## Dependencies
-run the below commands in the current directory <br/>
-The required libraries will be installed into ./lib <br/>
-mkdir lib <br/>
-pip install -t ./lib/ GoogleAppEngineCloudStorageClient <br/>
-
+listed in the requirements.txt
 
 
 ## License
