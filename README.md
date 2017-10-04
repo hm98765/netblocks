@@ -2,7 +2,7 @@
 
 **This is not an official Google product.**
 
-This is a [Google App Engine](https://cloud.google.com/appengine/) app that regularly checks the DNS entries as described [here](https://cloud.google.com/compute/docs/faq#where_can_i_find_short_product_name_ip_ranges).
+This is a [Google App Engine](https://cloud.google.com/appengine/) app that regularly checks the DNS entries as described [here](https://cloud.google.com/compute/docs/faq#where_can_i_find_product_name_short_ip_ranges).
 This code updates the GCS bucket, when there is a change in the CIDR blocks for GCE.
 
 Downstream systems can hook into the Object notification on the [GCS bucket](https://cloud.google.com/storage/docs/object-change-notification) and accordingly
