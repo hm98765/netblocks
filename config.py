@@ -22,5 +22,5 @@ Please change this as per your project configurations
 # The GCS Bucket that the cidr ranges should be written to
 GCS_BUCKET = "hm-distro-netblocks-list"
 
-# The filename which will have the cird ranges.
+# The filename which will have the cidr ranges.
 FILE_NAME = "netblocks.txt"
