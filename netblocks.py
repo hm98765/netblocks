@@ -114,7 +114,8 @@ class NetBlocks(object):
                         netblock_dns.append(include.split("include:")[1])
 
                 # Get the CIDR blocks from each of the dns name servers
-                for netblock_dns_entry in netblock_dns:
+                while (len(netblock_dns) > 0):
+                    netblock_dns_entry = netblock_dns.pop(0)
                     result = None  # reset it
                     result = self._fetch_json_(DNS_URL % netblock_dns_entry)
                     if result is not None:
@@ -122,6 +123,9 @@ class NetBlocks(object):
                         for item in items:
                             if item.startswith("ip"):
                                 cidr_blocks.add(str(item))
+                            elif item.startswith("include:"):
+                                netblock_dns.append(item.split("include:")[1])
+
                 return cidr_blocks
         except Exception as e:
             raise NetBlockRetrievalException(e.message)
