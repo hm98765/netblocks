@@ -12,6 +12,7 @@ setuptools.setup(
     url="https://github.com/hm-distro/netblocks/",
     packages=['netblocks'],
     include_package_data=True,
+    license="Apache 2",
     classifiers=(
         "Programming Language :: Python :: 2",
         "License :: OSI Approved :: Apache Software License",
