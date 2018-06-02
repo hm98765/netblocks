@@ -45,7 +45,13 @@ Potential listeners could be [Cloud Functions](https://cloud.google.com/function
  Make sure to create a bucket prior to deploying the app<br/>
  This bucket-name should be changed in the config.py under GCS_BUCKET
  
+ Deploy using 
  
+ `gcloud app  deploy app.yaml`
+ 
+ `gcloud app  deploy cron.yaml`
+ 
+  
  
 ## Products
 - [Google App Engine](https://cloud.google.com/appengine/)
@@ -59,6 +65,7 @@ mkdir lib <br/>
 pip install -t ./lib/ google-api-python-client <br/>
 pip install -t ./lib/ GoogleAppEngineCloudStorageClient <br/> 
 pip install -t ./lib/ requests <br/>
+pip install -t ./lib/ oauth2client <br/> 
 pip install -t ./lib/ requests-toolbelt <br/>
 
 ## License
