@@ -20,6 +20,7 @@ with open("./netblocks/README.md", "r") as fh:
 
 setuptools.setup(
     name="netblocks",
+    author='hm-distro',
     version="0.0.1",
     description="Get the Google netblocks",
     long_description=long_description,
