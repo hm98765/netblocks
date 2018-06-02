@@ -2,9 +2,10 @@
 
 **This is not an official Google product.**
 
-This is a [Google App Engine](https://cloud.google.com/appengine/) app that regularly checks the DNS entries as described [here](https://github.com/hm-distro/netblocks/blob/master/netblocks/README.md).
-This code updates the GCS bucket, when there is a change in the CIDR blocks for GCE.
-The netblocks module can be used outside App Engine.
+This is a [Google App Engine](https://cloud.google.com/appengine/) app that regularly checks the DNS entries using the [netblocks](https://github.com/hm-distro/netblocks/blob/master/netblocks/README.md) module.
+This App engine code updates the GCS bucket, when there is a change in the CIDR blocks for GCE.
+
+The netblocks api module itself can be used outside App Engine.
 Install the package with `pip install git+https://github.com/hm-distro/netblocks/`
     
 Downstream systems can hook into the Object notification on the [GCS bucket](https://cloud.google.com/storage/docs/object-change-notification) and accordingly
