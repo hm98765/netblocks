@@ -1,10 +1,20 @@
 # Netblocks
 
 **This is not an official Google product.**
+
 This module retrieves the DNS entries recursively as per the below links
 
 https://cloud.google.com/compute/docs/faq#where_can_i_find_short_product_name_ip_ranges
 https://support.google.com/a/answer/60764
+
+The `fetch()` method has the default parameter value of `initial_dns_list=[INITIAL_CLOUD_NETBLOCK_DNS, INITIAL_SPF_NETBLOCK_DNS]`
+
+where 
+
+
+INITIAL_CLOUD_NETBLOCK_DNS = "_cloud-netblocks.googleusercontent.com"
+
+INITIAL_SPF_NETBLOCK_DNS= "_spf.google.com"
 
 ### API Usage
 
