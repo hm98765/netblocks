@@ -7,6 +7,8 @@ This module retrieves the DNS entries recursively as per the below links
 https://cloud.google.com/compute/docs/faq#where_can_i_find_short_product_name_ip_ranges
 https://support.google.com/a/answer/60764
 
+Install the package with `pip install git+https://github.com/hm-distro/netblocks/`
+
 The `fetch()` method has the default parameter value of `initial_dns_list=[INITIAL_CLOUD_NETBLOCK_DNS, INITIAL_SPF_NETBLOCK_DNS]`
 
 where 
