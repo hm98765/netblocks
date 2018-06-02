@@ -24,15 +24,26 @@ import time
 
 import cloudstorage as gcs
 import webapp2
+from googleapiclient import discovery
+from oauth2client import client
+
+import requests_toolbelt.adapters.appengine
+# Use the App Engine Requests adapter. This makes sure that Requests uses URLFetch.
+requests_toolbelt.adapters.appengine.monkeypatch()
+
+from google.appengine.api import urlfetch
+urlfetch.set_default_fetch_deadline(60)
 
 import config
-import netblocks
+from netblocks import netblocks
 
+CREDENTIALS = client.GoogleCredentials.get_application_default()
+SERVICE = discovery.build("compute", "beta", credentials=CREDENTIALS)
 
 class DNSRefreshException(Exception):
     """
     This exception is a wrapper exception from this module.
-    
+
     This exception is thrown for any non successful operation in getting
     the DNS entries
     """
@@ -42,52 +53,44 @@ class DNSRefreshException(Exception):
 class DNSRefresh(webapp2.RequestHandler):
     """
     This abstract class retrieves the DNS entries recursively.
-  
+
     The implementing class needs to implement the process method
     to persist/process the CIDR blocks that are retrieved.
     """
 
-    def process(self, cidr_blocks):  # pylint: disable=unused-argument,unused-variable
+    def process(self, cidr_blocks, **kwargs):  # pylint: disable=unused-argument,unused-variable
         """
         Abstract callback method that is called on the set of CIDR blocks.
-    
+
         The inheriting class will need to implement this method and process
         the CIDR blocks.
-    
+
         The set contains strings like the below
         ip4:146.148.2.0/23
         ip6:2600:1900::/35
-    
+
         Args:
           cidr_blocks: the set of cidr blocks
-    
+
         Raises:
           DNSRefreshException: raised if any issue in dns refresh
-    
+
         """
         raise NotImplementedError("Please Implement this method")
 
     def get(self):
         """
         The main entry point to this class.
-    
+
         This method is the entry point that is called by the scheduler/cron.
         This method makes a call to the DNS servers, retrieves the json payload.
         extracts the ip addresses, and inserts them into a set that is returned.
-    
-        Returns:
-          A set of cidr blocks
-    
+
         """
         logging.info("dns refresh called")
         cidr_blocks = set()
-        netblocks_api = netblocks.NetBlocks()
-
         try:
-
-            cidr_blocks = netblocks_api.fetch()
-            self.process(cidr_blocks)
-
+            self.process()
         except netblocks.NetBlockRetrievalException as err:
             logging.error(err.message)
             self.response.headers["Content-Type"] = "text/plain"
@@ -101,22 +104,58 @@ class DNSRefresh(webapp2.RequestHandler):
 
 class UpdateGCSBucket(DNSRefresh):
     """
-    This class writes the CIR ranges to a GCS bucket, as a text file.
-  
+    This class writes the CIDR ranges to a GCS bucket, as a text file.
+
     """
 
-    def process(self, cidr_blocks):
+    def process(self):
         """
         Implementation of method that writes the cidr blocks to a GCS bucket.
-    
+        This imoleentation gets both the GCE and the SPF netblocks and
+        writes them to two seperate files.
+
         Args:
           cidr_blocks: The URL to fetch the json payload
-    
+
         Raises:
           DNSRefreshException: raised if any issue in dns refresh
         """
+
+        logging.info("dns refresh called")
+        cidr_blocks = set()
+
+        netblocks_api = netblocks.NetBlocks()
+
+        gce_cidr_blocks = netblocks_api.fetch(initial_dns_list=[netblocks.INITIAL_CLOUD_NETBLOCK_DNS])
+        google_cidr_blocks = netblocks_api.fetch(initial_dns_list=[netblocks.INITIAL_SPF_NETBLOCK_DNS])
+
+        # Get the GCE cidr blocks
+        self._process(gce_cidr_blocks, filename=config.CLOUD_NETBLOCKS_FILE_NAME)
+
+        # Get the SPF cidr blocks
+        self._process(google_cidr_blocks, filename=config.SPF_NETBLOCKS_FILE_NAME)
+
+        # Union the two sets to return
+        cidr_blocks = gce_cidr_blocks.union(google_cidr_blocks)
+
+        return cidr_blocks
+
+
+
+    def _process(self, cidr_blocks,filename):
+        """
+        Implementation of method that writes the cidr blocks to a GCS bucket.
+
+        Args:
+          cidr_blocks: The URL to fetch the json payload
+          filename: The filename to write
+
+        Raises:
+          DNSRefreshException: raised if any issue in dns refresh
+        """
+
         should_write_file = False
-        fqdn_file_name = "/%s/%s" % (config.GCS_BUCKET, config.FILE_NAME)
+        fqdn_file_name = "/%s/%s" % (config.GCS_BUCKET, filename)
         logging.info("Processing file at %s", fqdn_file_name)
         old_cidr_blocks = set()
 

@@ -23,4 +23,6 @@ Please change this as per your project configurations
 GCS_BUCKET = "hm-distro-netblocks-list"
 
 # The filename which will have the cidr ranges.
-FILE_NAME = "netblocks.txt"
+CLOUD_NETBLOCKS_FILE_NAME = "cloud_netblocks.txt"
+SPF_NETBLOCKS_FILE_NAME = "spf_netblocks.txt"
+

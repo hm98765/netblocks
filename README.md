@@ -54,6 +54,8 @@ Run these steps before deploying the app <br/>
 mkdir lib <br/>
 pip install -t ./lib/ google-api-python-client <br/>
 pip install -t ./lib/ GoogleAppEngineCloudStorageClient <br/> 
+pip install -t ./lib/ requests <br/>
+pip install -t ./lib/ requests-toolbelt <br/>
 
 ## License
 Apache 2.0; see [LICENSE](LICENSE) for details.
