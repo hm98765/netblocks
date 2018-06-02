@@ -28,11 +28,11 @@ INITIAL_SPF_NETBLOCK_DNS= "_spf.google.com"
         cidr_blocks = netblocks_api.fetch()
         
         # To get only the SPF list use the below:
-        #  cidr_blocks = api.fetch([INITIAL_SPF_NETBLOCK_DNS])
+        #  cidr_blocks = api.fetch([netblocks.INITIAL_SPF_NETBLOCK_DNS])
  
         
         # To get only the GCE list use the below:
-        #  cidr_blocks = api.fetch([INITIAL_CLOUD_NETBLOCK_DNS]) 
+        #  cidr_blocks = api.fetch([netblocks.INITIAL_CLOUD_NETBLOCK_DNS]) 
         
         """
         The cidr_blocks set contains strings like the below
