@@ -20,7 +20,7 @@ Configs for this app.
 Please change this as per your project configurations
 """
 # The GCS Bucket that the cidr ranges should be written to
-GCS_BUCKET = "hm-distro-netblocks-list"
+GCS_BUCKET = "<CHANGE TO GCS BUCKET>"
 
 # The filename which will have the cidr ranges.
 CLOUD_NETBLOCKS_FILE_NAME = "cloud_netblocks.txt"
