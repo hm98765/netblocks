@@ -25,8 +25,8 @@ import logging
 import requests
 
 DNS_URL = "https://dns.google.com/resolve?name=%s&type=TXT"
-INITIAL_CLOUD_NETBLOCK_DNS = "_cloud-netblocks.googleusercontent.com"
-INITIAL_SPF_NETBLOCK_DNS= "_spf.google.com"
+GOOGLE_INITIAL_CLOUD_NETBLOCK_DNS = "_cloud-netblocks.googleusercontent.com"
+GOOGLE_INITIAL_SPF_NETBLOCK_DNS= "_spf.google.com"
 
 
 class NetBlockRetrievalException(Exception):
@@ -75,7 +75,7 @@ class NetBlocks(object):
             raise Exception("Error in fetching %s.Code %d."
                             % (url, result.status_code))
 
-    def fetch(self, initial_dns_list=[INITIAL_CLOUD_NETBLOCK_DNS, INITIAL_SPF_NETBLOCK_DNS]):
+    def fetch(self, initial_dns_list=[GOOGLE_INITIAL_CLOUD_NETBLOCK_DNS, GOOGLE_INITIAL_SPF_NETBLOCK_DNS]):
         """
         The main entry point to this class.
     
@@ -132,7 +132,7 @@ class NetBlocks(object):
 
 if __name__ =="__main__":
     api=  NetBlocks()
-    cidr_blocks = api.fetch([INITIAL_SPF_NETBLOCK_DNS])
+    cidr_blocks = api.fetch([GOOGLE_INITIAL_SPF_NETBLOCK_DNS])
     print "Total %d" % len(cidr_blocks)
     for cidr in cidr_blocks:
         print cidr

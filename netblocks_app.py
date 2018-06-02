@@ -126,8 +126,8 @@ class UpdateGCSBucket(DNSRefresh):
 
         netblocks_api = netblocks.NetBlocks()
 
-        gce_cidr_blocks = netblocks_api.fetch(initial_dns_list=[netblocks.INITIAL_CLOUD_NETBLOCK_DNS])
-        google_cidr_blocks = netblocks_api.fetch(initial_dns_list=[netblocks.INITIAL_SPF_NETBLOCK_DNS])
+        gce_cidr_blocks = netblocks_api.fetch(initial_dns_list=[netblocks.GOOGLE_INITIAL_CLOUD_NETBLOCK_DNS])
+        google_cidr_blocks = netblocks_api.fetch(initial_dns_list=[netblocks.GOOGLE_INITIAL_SPF_NETBLOCK_DNS])
 
         # Get the GCE cidr blocks
         self._process(gce_cidr_blocks, filename=config.CLOUD_NETBLOCKS_FILE_NAME)
