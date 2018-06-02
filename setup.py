@@ -10,6 +10,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/hm-distro/netblocks/",
+    package_dir={'': 'netblocks'},
     packages=setuptools.find_packages('netblocks'),
     classifiers=(
         "Programming Language :: Python :: 2",
