@@ -1,6 +1,6 @@
 import setuptools
 
-with open("./netblocks/README.md", "r") as fh:
+with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
@@ -12,6 +12,7 @@ setuptools.setup(
     url="https://github.com/hm-distro/netblocks/",
     package_dir={'': 'netblocks'},
     packages=setuptools.find_packages('netblocks'),
+    include_package_data=True,
     classifiers=(
         "Programming Language :: Python :: 2",
         "License :: OSI Approved :: Apache Software License",
