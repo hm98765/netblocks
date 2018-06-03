@@ -17,6 +17,7 @@ GOOGLE_INITIAL_CLOUD_NETBLOCK_DNS = "_cloud-netblocks.googleusercontent.com"
 
 GOOGLE_INITIAL_SPF_NETBLOCK_DNS= "_spf.google.com"
 
+See [here](https://github.com/hm-distro/netblocks) on how to use this module in Google App Engine  
 ### API Usage
 
     import netblocks
