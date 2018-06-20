@@ -52,4 +52,4 @@ See [here](https://github.com/hm-distro/netblocks) on how to use this module in 
 requests
 
 ## License
-Apache 2.0; see [LICENSE](LICENSE) for details.
+Apache 2.0; see [LICENSE](https://github.com/hm-distro/netblocks/blob/master/netblocks/LICENSE) for details.
