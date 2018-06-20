@@ -1,1 +1,1 @@
-include ./netblocks/README.md
+recursive-include netblocks README.md LICENSE
