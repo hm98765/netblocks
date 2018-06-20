@@ -21,7 +21,7 @@ with open("./netblocks/README.md", "r") as fh:
 setuptools.setup(
     name="netblocks",
     author='hm-distro',
-    version="0.0.2",
+    version="0.0.4",
     description="Get the Google netblocks",
     long_description=long_description,
     long_description_content_type="text/markdown",
@@ -38,5 +38,4 @@ setuptools.setup(
         "License :: OSI Approved :: Apache Software License",
         "Operating System :: OS Independent",
     ),
-    data_files=[()]
 )
