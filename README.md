@@ -6,7 +6,7 @@ This is a [Google App Engine](https://cloud.google.com/appengine/) app that regu
 This App engine code updates the GCS bucket, when there is a change in the CIDR blocks for GCE.
 
 The netblocks api module itself can be used outside App Engine.
-Install the package with `pip install git+https://github.com/hm-distro/netblocks/`
+Install the package with `pip install netblocks` or `pip install git+https://github.com/hm-distro/netblocks/`
     
 Downstream systems can hook into the Object notification on the [GCS bucket](https://cloud.google.com/storage/docs/object-change-notification) and accordingly
 do something with the file, with the updated CIDR ranges.
