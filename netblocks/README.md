@@ -25,7 +25,7 @@ See [here](https://github.com/hm-distro/netblocks) on how to use this module in 
 
     import netblocks
     cidr_blocks = set()
-    netblocks_api = netblocks.NetBlocks()
+    api = netblocks.NetBlocks()
     try:
         # returns both GOOGLE_INITIAL_CLOUD_NETBLOCK_DNS and GOOGLE_INITIAL_SPF_NETBLOCK_DNS
         cidr_blocks = netblocks_api.fetch()
