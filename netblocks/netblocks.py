@@ -27,6 +27,7 @@ import requests
 DNS_URL = "https://dns.google.com/resolve?name=%s&type=TXT"
 GOOGLE_INITIAL_CLOUD_NETBLOCK_DNS = "_cloud-netblocks.googleusercontent.com"
 GOOGLE_INITIAL_SPF_NETBLOCK_DNS= "_spf.google.com"
+AWS_IP_RANGES="https://ip-ranges.amazonaws.com/ip-ranges.json"
 
 
 class NetBlockRetrievalException(Exception):
@@ -103,27 +104,37 @@ class NetBlocks(object):
         try:
             # Get the list of dns name servers to lookup
             for initial_dns in initial_dns_list:
-                result = None
-                result = self._fetch_json_(DNS_URL % initial_dns)
-                netblock_dns = []
-                if result is not None:
-                    include_list = result.split(" ")
-                    for include in include_list:
-                        if include.startswith("include:"):
-                            netblock_dns.append(include.split("include:")[1])
 
-                    # Get the CIDR blocks from each of the dns name servers
-                    while len(netblock_dns) > 0:
-                        netblock_dns_entry = netblock_dns.pop(0)
-                        result = None  # reset it
-                        result = self._fetch_json_(DNS_URL % netblock_dns_entry)
-                        if result is not None:
-                            items = result.split(" ")
-                            for item in items:
-                                if item.startswith("ip"):
-                                    cidr_blocks.add(str(item))
-                                elif item.startswith("include:"):
-                                    netblock_dns.append(item.split("include:")[1])
+                if AWS_IP_RANGES == initial_dns:
+                    r = requests.get(AWS_IP_RANGES)
+                    payload=  r.json()
+                    for prefix in payload['prefixes']:
+                        cidr_blocks.add("ip4:%s"%prefix['ip_prefix'])
+
+                    for prefix in payload['ipv6_prefixes']:
+                        cidr_blocks.add("ip6:%s" % prefix['ipv6_prefix'])
+                else:
+                    result = None
+                    result = self._fetch_json_(DNS_URL % initial_dns)
+                    netblock_dns = []
+                    if result is not None:
+                        include_list = result.split(" ")
+                        for include in include_list:
+                            if include.startswith("include:"):
+                                netblock_dns.append(include.split("include:")[1])
+
+                        # Get the CIDR blocks from each of the dns name servers
+                        while len(netblock_dns) > 0:
+                            netblock_dns_entry = netblock_dns.pop(0)
+                            result = None  # reset it
+                            result = self._fetch_json_(DNS_URL % netblock_dns_entry)
+                            if result is not None:
+                                items = result.split(" ")
+                                for item in items:
+                                    if item.startswith("ip"):
+                                        cidr_blocks.add(str(item))
+                                    elif item.startswith("include:"):
+                                        netblock_dns.append(item.split("include:")[1])
 
             return cidr_blocks
         except Exception as e:
@@ -132,7 +143,7 @@ class NetBlocks(object):
 
 if __name__ =="__main__":
     api=  NetBlocks()
-    cidr_blocks = api.fetch([GOOGLE_INITIAL_SPF_NETBLOCK_DNS])
+    cidr_blocks = api.fetch()
     print "Total %d" % len(cidr_blocks)
     for cidr in cidr_blocks:
         print cidr
