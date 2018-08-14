@@ -28,7 +28,7 @@ See [here](https://github.com/hm-distro/netblocks) on how to use this module in 
     api = netblocks.NetBlocks()
     try:
         # returns both GOOGLE_INITIAL_CLOUD_NETBLOCK_DNS and GOOGLE_INITIAL_SPF_NETBLOCK_DNS
-        cidr_blocks = netblocks_api.fetch()
+        cidr_blocks = api.fetch()
         
         # To get only the SPF list use the below:
         #  cidr_blocks = api.fetch([netblocks.GOOGLE_INITIAL_SPF_NETBLOCK_DNS])
