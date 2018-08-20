@@ -3,9 +3,13 @@
 **This is not an official Google product.**
 
 This module retrieves the DNS entries recursively as per the below links
-https://cloud.google.com/compute/docs/faq#where_can_i_find_product_name_short_ip_ranges
-https://support.google.com/a/answer/60764
-and fetches the AWS blocks as per https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html
+
+    The GCE ranges
+        https://cloud.google.com/compute/docs/faq#where_can_i_find_product_name_short_ip_ranges
+    The Google Services ranges
+        https://support.google.com/a/answer/60764
+    The AWS ranges
+        https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html
 
 Install the package with `pip install netblocks` or `pip install git+https://github.com/hm-distro/netblocks/`
 
@@ -13,12 +17,14 @@ The `fetch()` method has the default parameter value of `initial_dns_list=[GOOGL
 
 where 
 
+    #The GCE ranges
+    GOOGLE_INITIAL_CLOUD_NETBLOCK_DNS = "_cloud-netblocks.googleusercontent.com"
 
-GOOGLE_INITIAL_CLOUD_NETBLOCK_DNS = "_cloud-netblocks.googleusercontent.com"
+    #The Google Services ranges
+    GOOGLE_INITIAL_SPF_NETBLOCK_DNS= "_spf.google.com"
 
-GOOGLE_INITIAL_SPF_NETBLOCK_DNS= "_spf.google.com"
-
-AWS_IP_RANGES="https://ip-ranges.amazonaws.com/ip-ranges.json"
+    #The AWS ranges
+    AWS_IP_RANGES="https://ip-ranges.amazonaws.com/ip-ranges.json"
 
 See [here](https://github.com/hm-distro/netblocks) on how to use this module in Google App Engine  
 ### API Usage

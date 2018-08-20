@@ -21,7 +21,7 @@ with open("./netblocks/README.md", "r") as fh:
 setuptools.setup(
     name="netblocks",
     author='hm-distro',
-    version="0.0.10",
+    version="0.0.11",
     description="Get the Cloud Provider netblocks",
     long_description=long_description,
     long_description_content_type="text/markdown",
